@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>尋找老照片 AR 小遊戲 APP 說明</title>
+
+<style>
+:root{
+  --bg:#f6f1ea;
+  --bg-soft:rgba(255,255,255,.58);
+  --card:#ffffffcc;
+
+  --text:#000000;
+  --text-soft:#0b0b0b;
+
+  --line:rgba(86,67,54,.14);
+
+  /* ✅ 棕色系 */
+  --title-brown:#5b4333;
+
+  /* ✅ 橘色提示 */
+  --gift-orange:#d36a00;
+
+  --shadow:0 18px 50px rgba(62,43,30,.10);
+  --radius:24px;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-weight:300;
+  color:var(--text);
+  background:
+    linear-gradient(rgba(246,241,234,.80), rgba(246,241,234,.94)),
+    url("images/bg.jpg") center/cover fixed no-repeat;
+}
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  padding:34px 18px 56px;
+}
+
+.hero-content{
+  position:relative;
+  max-width:1080px;
+  margin:0 auto;
+}
+
+/* 頂部主視覺卡片 */
+.hero-panel{
+  background:var(--bg-soft);
+  border:1px solid rgba(255,255,255,.55);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-radius:32px;
+  box-shadow:var(--shadow);
+  padding:34px 30px 30px;
+}
+
+/* ✅ AR GUIDE：棕色 */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  letter-spacing:.18em;
+  color:var(--title-brown);
+  margin-bottom:16px;
+}
+.eyebrow::before{
+  content:"";
+  width:34px;
+  height:1px;
+  background:var(--title-brown);
+  opacity:.65;
+}
+
+/* ✅ 主標：棕色 */
+.hero-title{
+  margin:0;
+  text-align:center;
+  font-size:44px;
+  font-weight:800;
+  line-height:1.25;
+  letter-spacing:.04em;
+  color:var(--title-brown);
+}
+
+/* 說明：空兩格 */
+.hero-lead{
+  max-width:820px;
+  margin:18px auto 0;
+  font-size:20px;
+  line-height:2;
+  color:var(--text-soft);
+  text-align:left;
+  text-indent:2em;
+}
+
+/* ✅ 橘色 + 粗體 */
+.gift-note{
+  max-width:820px;
+  margin:12px auto 0;
+  text-align:center;
+  font-size:20px;
+  line-height:1.8;
+  color:var(--gift-orange);
+  text-indent:0;
+  font-weight:900;
+
+  display:block;
+  width:100%;
+  white-space:normal;
+  word-break:keep-all;
+  overflow-wrap:normal;
+  line-break:strict;
+}
+
+/* 影片：變大、不內縮 */
+.yt-shell{
+  margin:22px 0 0;
+  padding:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  border-radius:0;
+}
+.yt-box{
+  width:100%;
+  overflow:hidden;
+  border-radius:20px;
+  background:#000;
+  position:relative;
+  padding-top:56.25%;
+  box-shadow:0 18px 45px rgba(62,43,30,.12);
+}
+.yt-box iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* 內文區塊 */
+.section-wrap{
+  margin-top:30px;
+  display:grid;
+  gap:22px;
+}
+
+.step{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:28px 26px;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.step-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:14px;
+}
+
+.step-no{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.06);
+  border:1px solid rgba(0,0,0,.12);
+  color:#000;
+  font-size:19px;
+  font-weight:800;
+  flex:0 0 auto;
+}
+
+/* ✅ step 標題：棕色 */
+.step-title{
+  margin:0;
+  font-size:30px;
+  line-height:1.35;
+  font-weight:800;
+  letter-spacing:.02em;
+  color:var(--title-brown);
+}
+
+/* ✅ 文字到圖片間距：再加大 */
+.step-text{
+  font-size:20px;
+  line-height:2;
+  color:var(--text-soft);
+  margin-bottom:56px; /* ✅ 原本 44 -> 56 */
+}
+.step-text p{
+  margin:0 0 10px;
+  text-indent:2em;
+}
+.step-text p:last-child{ margin-bottom:0; }
+
+.no-indent{ text-indent:0 !important; }
+
+/* ✅ 圖片上方距離：再加大 */
+.figure-panel{
+  margin-top:44px; /* ✅ 原本 34 -> 44 */
+  display:flex;
+  justify-content:center;
+}
+.figure-panel img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 14px 30px rgba(40,28,20,.10);
+}
+
+/* step1 */
+.step1-app-wrap img{ max-width:180px; }
+
+.step1-bottom{
+  margin:24px auto 0;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:18px;
+  max-width:620px;
+}
+.step1-bottom img{
+  max-width:280px;
+  margin:0 auto;
+}
+
+/* step2 */
+.step-single img{ max-width:210px; }
+
+/* ✅ Step2 說明區塊往下更多 */
+.step-note{ margin-top:52px; } /* ✅ 原本 40 -> 52 */
+.step-note p{
+  margin:0 0 10px;
+  text-indent:2em;
+}
+
+/* ✅ 顏色更清楚 */
+.note-green{ color:#0b5a22; font-weight:800; }
+.note-red{ color:#8f1010; font-weight:800; }
+.note-blue{ color:#163a86; font-weight:800; }
+
+/* ✅ 只修正這段（○ / ×）讓它「超平整」：符號獨立欄位、換行對齊文字 */
+.step-note p.note-bullet{
+  text-indent:0 !important;
+  margin:0 0 12px 0;
+  display:flex;
+  align-items:flex-start;
+  gap:.55em;
+  line-height:2;
+  text-align:left;
+}
+.step-note p.note-bullet::before{
+  flex:0 0 1.2em;        /* 固定符號欄寬 */
+  text-align:center;
+  font-weight:900;
+}
+.step-note p.note-green.note-bullet::before{ content:"○"; }
+.step-note p.note-red.note-bullet::before{ content:"×"; }
+
+/* ✅ 填答成功示例：跟三張圖距離更大 */
+.example-title{
+  margin-top:14px;
+  margin-bottom:34px;  /* ✅ 原本 28 -> 34 */
+  font-size:18px;
+  font-weight:800;
+  color:var(--title-brown);
+}
+
+/* ✅ 三張圖整體往下多一段 */
+.step-images.three{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:14px;
+  justify-content:center;
+  max-width:560px;
+  margin:28px auto 0; /* ✅ 原本 18 -> 28 */
+}
+.step-images.three img{
+  width:100%;
+  max-width:170px;
+  margin:0 auto;
+  border-radius:16px;
+}
+
+/* step3 */
+.step-pass img{ max-width:210px; }
+
+/* 裝飾分隔 */
+.soft-divider{
+  width:100%;
+  max-width:120px;
+  height:1px;
+  margin:8px 0 0;
+  background:linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,.25), rgba(0,0,0,0));
+}
+
+/* 手機版 */
+@media (max-width: 900px){
+  body{
+    background:
+      linear-gradient(rgba(246,241,234,.90), rgba(246,241,234,.97)),
+      url("images/bg.jpg") center/cover no-repeat;
+  }
+
+  .hero{ padding:18px 12px 34px; }
+
+  .hero-panel{
+    padding:22px 16px 20px;
+    border-radius:24px;
+  }
+
+  .eyebrow{ font-size:12px; margin-bottom:12px; }
+
+  .hero-title{ font-size:30px; line-height:1.35; }
+
+  .hero-lead{
+    margin-top:14px;
+    font-size:17px;
+    line-height:1.9;
+    text-align:left;
+    text-indent:2em;
+  }
+
+  .gift-note{
+    font-size:17px;
+    margin-top:10px;
+    font-weight:900;
+  }
+
+  .yt-shell{ margin-top:16px; }
+  .yt-box{ border-radius:16px; }
+
+  .section-wrap{ margin-top:18px; gap:16px; }
+
+  .step{
+    padding:18px 14px;
+    border-radius:18px;
+  }
+
+  .step-head{ gap:10px; margin-bottom:10px; }
+
+  .step-no{ width:34px; height:34px; font-size:16px; }
+
+  .step-title{ font-size:23px; }
+
+  /* ✅ 手機：文字到圖片距離再加大 */
+  .step-text{
+    font-size:17px;
+    line-height:1.9;
+    margin-bottom:36px; /* ✅ 原本 28 -> 36 */
+  }
+
+  .figure-panel{ margin-top:28px; } /* ✅ 原本 22 -> 28 */
+  .step-note{ margin-top:34px; }    /* ✅ 原本 28 -> 34 */
+
+  .step-text p{ margin-bottom:8px; }
+
+  .step1-app-wrap img{ max-width:118px; }
+
+  .step1-bottom{ gap:10px; max-width:240px; }
+  .step1-bottom img{ max-width:115px; border-radius:12px; }
+
+  .step-single img{ max-width:132px; }
+
+  .example-title{
+    font-size:16px;
+    margin-top:10px;
+    margin-bottom:24px; /* ✅ 原本 20 -> 24 */
+  }
+
+  .step-images.three{
+    gap:8px;
+    max-width:228px;
+    margin-top:18px; /* ✅ 原本 12 -> 18 */
+  }
+  .step-images.three img{
+    max-width:70px;
+    border-radius:10px;
+  }
+
+  .step-pass img{ max-width:132px; }
+}
+
+@media (min-width: 901px){
+  .step:hover{
+    transform:translateY(-1px);
+    transition:.25s ease;
+  }
+}
+</style>
+</head>
+
+<body>
+  <div class="hero">
+    <div class="hero-content">
+
+      <section class="hero-panel">
+        <div class="eyebrow">AR GUIDE</div>
+
+        <h1 class="hero-title">尋找老照片 AR 小遊戲 APP 說明</h1>
+
+        <p class="hero-lead">
+          本APP支援iphone15及Android10以上版本，於展場QR Code下載APP後，您可選擇觀看下方說明影片，或依照步驟完成挑戰。
+        </p>
+
+        <!-- ✅ 橘色 + 粗體 -->
+        <p class="gift-note"><strong>＊答對5題可以找櫃檯領禮物，加油！</strong></p>
+
+        <div class="yt-shell">
+          <div class="yt-box">
+            <iframe
+              src="https://www.youtube.com/embed/q_KWb9r5Bhc"
+              title="尋找老照片 AR 小遊戲 APP 說明影片"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-wrap">
+
+        <!-- Step 1 -->
+        <section class="step">
+          <div class="step-head">
+            <div class="step-no">1</div>
+            <h2 class="step-title">先找到正確的老照片</h2>
+          </div>
+          <div class="soft-divider"></div>
+
+          <div class="step-text" style="margin-top:14px;">
+            <p>
+              請先在 APP 下方選擇「遊戲挑戰」。展場中每一幅老照片的裱框右下角，都有一張標示題名與年代的老照片解說牌。
+            </p>
+            <p>
+              找到與 APP 顯示內容相同的老照片後，請再次確認題名與年代都與 APP 相符，再按下 <span class="note-blue">「Go find」</span> 進入 AR 掃描畫面。
+            </p>
+          </div>
+
+          <div class="figure-panel step1-app-wrap">
+            <img src="images/step01_app.png" alt="步驟一 APP 畫面">
+          </div>
+
+          <div class="step1-bottom">
+            <div class="figure-panel" style="margin-top:0;">
+              <img src="images/step01_frame.png" alt="步驟一 展場相框">
+            </div>
+            <div class="figure-panel" style="margin-top:0;">
+              <img src="images/step01_label.png" alt="步驟一 題名與年代標籤">
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="step">
+          <div class="step-head">
+            <div class="step-no">2</div>
+            <h2 class="step-title">進入 AR 掃描並送出答案</h2>
+          </div>
+          <div class="soft-divider"></div>
+
+          <div class="step-text" style="margin-top:14px;">
+            <p>
+              畫面進入 AR 鏡頭後，請對準相框中的老照片，按下 <span class="note-blue">「送出答案」</span>，AR 模型會協助辨識圖像內容。
+            </p>
+          </div>
+
+          <div class="figure-panel step-single">
+            <img src="images/step02_scan.png" alt="步驟二 掃描畫面">
+          </div>
+
+          <div class="step-text step-note">
+            <!-- ✅ 用 note-bullet，符號由 CSS 生出來，換行超平整 -->
+            <p class="note-green note-bullet">
+              如果答對，畫面會顯示「你找到我了！」。按下「回年代表選單」後，老照片會回填至年代表，並計入正確答題。
+            </p>
+
+            <p class="note-green">
+              部分老照片回填後會出現「歷史說明」，可點入觀看影片與 AI 動圖。
+            </p>
+
+            <p class="note-red note-bullet">
+              如果您沒有選到正確的照片，畫面會顯示「不是這張」。
+            </p>
+          </div>
+
+          <div class="example-title no-indent">填答成功示例</div>
+
+          <div class="step-images three">
+            <img src="images/step02_success1.png" alt="步驟二 成功畫面 1">
+            <img src="images/step02_success2.png" alt="步驟二 成功畫面 2">
+            <img src="images/step02_success3.png" alt="步驟二 成功畫面 3">
+          </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="step">
+          <div class="step-head">
+            <div class="step-no">3</div>
+            <h2 class="step-title">累積答題進度並完成挑戰</h2>
+          </div>
+          <div class="soft-divider"></div>
+
+          <div class="step-text" style="margin-top:14px;">
+            <p>
+              左上角會顯示目前答題率。當答對 5 題後，畫面會出現 PASS 標示，請持此畫面至櫃檯向工作人員領取禮物。
+            </p>
+            <p class="note-red">
+              ＊禮物數量有限，送完為止。
+            </p>
+          </div>
+
+          <div class="figure-panel step-pass">
+            <img src="images/step03_pass.png" alt="步驟三 PASS 畫面">
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
